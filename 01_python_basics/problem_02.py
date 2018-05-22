@@ -9,14 +9,23 @@ Implement a half-life function that uses a while loop.
 f(t) = a * (1/2)^t
 '''
 def half_life_while(a, t):
-  return 1 # delete this line and write your code
+    time = 1  
+    while t > 0:
+        time = 1/2 * time
+        t -= 1
+    return a * time
+    
 
 '''
 Exercise 2:
 Implement a half-life function that uses a for loop.
 '''
 def half_life_for(a, t):
-  return 1 # delete this line and write your code
+    time = 1.0
+    for i in range(t):
+        time = 1/2 * time
+    return a * time
+    
 
 '''
 Exercise 3:
@@ -25,14 +34,25 @@ Recall that n! = n * (n - 1) * ... 1
 For simplicity, assume that 0! = (-1)! = 0.
 '''
 def factorial_recur(n):
-  return 0 # delete this line and write your code
+    if n == 1:
+        return 1
+    elif n < 1:
+        return 0
+    else: 
+        return n * factorial_recur(n-1)
 
 '''
 Exercise 4:
 Implement fibonacci using recursion.
 '''
 def fib(n):
-  return 1 # delete this line and write your code
+    fibo = 1
+    if n < 1:
+        return 0
+    elif n <= 2:
+        return 1
+    else:
+        return fib(n-1) + fib(n-2)
 
 '''
 Exercise 5:
@@ -43,6 +63,13 @@ Write your own function and call it combination.
 Use the factorial_iter function located in util.py; it has already
   been imported for you so you just need to call factorial_iter(number)
 '''
+def combination(n, r):
+    if r > n:
+        return 0
+    elif n == 0 or n == r:
+        return 1
+    else:
+        return factorial_iter(n)/(factorial_iter(n-r)*factorial_iter(r))
 
 ############################# Test cases ######################################
 def test_factorial():
