@@ -9,7 +9,12 @@ to change directories to solve this problem.
 from util import *
 
 def crawl_directory(path):
-  pass
+    for fname in os.listdir(path):
+        print(fname)
+        if os.path.isdir(os.path.join(path, fname)) == True:
+            crawl_directory(os.path.join(path, fname))
+    return None
+
 
 if __name__ == "__main__":
   crawl_directory('example_dir')
