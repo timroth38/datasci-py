@@ -38,6 +38,9 @@ Hints:
   https://docs.python.org/3/library/csv.html#csv.writer
 """
 def write_csv(fpath, tups, log=True):
-  # your code here
-  pass # delete this line
+	with open(fpath, 'w', newline='') as csvfile:
+		filewriter = csv.writer(csvfile, delimiter = ',', quotechar = '"', quoting=csv.QUOTE_MINIMAL)
+		for list_line in range(len(tups)):
+			filewriter.writerow(tups[list_line])
+
 
