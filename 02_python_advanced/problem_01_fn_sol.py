@@ -3,16 +3,12 @@ You should write all of your functions in this file. That way we can
 use parts of this file later in the course.
 """
 # this line imports numpy as np, csv, os, etc.
-from util import *
+from util_sol import *
 ################################ Constants ####################################
 # degree -> salaries
 # college -> salaries
 # Note that we do not save the percent change between starting/mid salary.
-<<<<<<< HEAD
 START_SAL, MED_SAL, MID_10, MID_25, MID_75, MID_90 = range(6)
-=======
-START_SAL, MID_SAL, MID_10, MID_25, MID_75, MID_90 = range(6)
->>>>>>> upstream/master
 
 ################################ Loading ######################################
 """
@@ -28,27 +24,6 @@ Hints:
        use line[1:] to access the second element onwards
 """
 def load_degrees(degree_fpath):
-<<<<<<< HEAD
-	degree_dict = {}
-	headers = []
-	#header = headies.strip().split(',') for headies in headers
-	with open(degree_fpath, 'r') as f:
-		headers = f.readline()
-		headers = headers.strip().split(',')
-		poptarget = headers.index('Percent change from Starting to Mid-Career Salary')
-		headers.pop(poptarget)
-		headers.pop(0)
-		#pull percentage index for headers and apply with the .pop command in the for loop
-		for line in csv.reader(f):
-			line = [degree.strip('$').replace(',', '') for degree in line]
-			line.pop(poptarget)
-			key = line[0]
-			START_SAL, MED_SAL, MID_10, MID_25, MID_75, MID_90 = line[1:]
-			degree_dict[key] = [float(START_SAL), float(MED_SAL), float(MID_10), float(MID_25), float(MID_75), float(MID_90)]
-			
-			
-	return headers, degree_dict
-=======
   degree_dict = {}
   headers = []
   # your code here
@@ -64,7 +39,6 @@ def load_degrees(degree_fpath):
       float_values.pop(ignore_ind)
       degree_dict[degree] = float_values
   return headers, degree_dict
->>>>>>> upstream/master
 
 """
 Write your load_colleges(...) function here.
@@ -84,42 +58,6 @@ Hints:
   ```continue``` keyword to go to the next line, or you can encapsulate what
   you have in a conditional.
 """
-<<<<<<< HEAD
-def load_colleges(salaries_type_fpath, salaries_region_fpath):
-	college_dict, type_to_colleges, region_to_colleges = {}, {}, {}
-	with open(salaries_type_fpath, 'r') as file1:
-		file1.readline()
-		for line in csv.reader(file1):
-			key1 = line[0]
-			key2 = line[1]
-			line[2:] = [salary.strip('$').replace(',', '').replace('N/A', '-1') for salary in line[2:]]
-			#print(line)
-			#print(key1)
-			#print(key2)
-			START_SAL, MED_SAL, MID_10, MID_25, MID_75, MID_90 = line[2:]
-			college_dict[key1] = [float(START_SAL), float(MED_SAL), float(MID_10), float(MID_25), float(MID_75), float(MID_90)]
-			if key2 not in type_to_colleges:
-				type_to_colleges[key2] = []
-			type_to_colleges[key2].append(key1)
-	with open(salaries_region_fpath, 'r') as file2:
-		file2.readline()
-		for line in csv.reader(file2):
-			key3 = line[0]
-			key4 = line[1]
-			line[2:] = [salary.strip('$').replace(',', '').replace('N/A', '-1') for salary in line[2:]]
-			#print(line)
-			#print(key3)
-			#print(key4)
-			START_SAL, MED_SAL, MID_10, MID_25, MID_75, MID_90 = line[2:]
-			if key3 not in college_dict:
-				college_dict[key3] = [float(START_SAL), float(MED_SAL), float(MID_10), float(MID_25), float(MID_75), float(MID_90)]
-			if key4 not in region_to_colleges:
-				region_to_colleges[key4] = []
-			region_to_colleges[key4].append(key3)
-			
-
-	return college_dict, type_to_colleges, region_to_colleges
-=======
 def load_colleges(salaries_type_fpath ,salaries_region_fpath):
   college_dict, type_to_colleges, region_to_colleges = {}, {}, {}
   # your code here
@@ -171,7 +109,6 @@ def load_colleges(salaries_type_fpath ,salaries_region_fpath):
       college_dict[college] = float_values
 
   return college_dict, type_to_colleges, region_to_colleges
->>>>>>> upstream/master
 
 """
 Write your write_colleges(...) function here.
@@ -184,34 +121,6 @@ Hints:
   a list of lists, where each sublist is a row of the target csv.
 - Use the write_csv function from util that you implemented in lecture.
 """
-<<<<<<< HEAD
-def write_colleges(college_fpath, salary_headers, college_dict, type_to_colleges, region_to_colleges):
-	tups = []
-	college_keys = [k for k, v in college_dict.items()]
-	sorted_college_list = sorted(college_keys)
-	master_dict = {}
-	for college in sorted_college_list:
-		key1 = college
-		college_type = 'N/A'
-		college_region = 'N/A'
-		for k, v in college_dict.items():
-			if k == key1:
-				START_SAL, MED_SAL, MID_10, MID_25, MID_75, MID_90 = v
-		for k, v in type_to_colleges.items():
-			if key1 in v:
-				college_type = k
-		for k, v in region_to_colleges.items():
-			if key1 in v:
-				college_region = k
-		master_dict[key1] = [college_region, college_type, float(START_SAL), float(MED_SAL), float(MID_10), float(MID_25), float(MID_75), float(MID_90)]
-	full_list = []
-	for college, values in master_dict.items():
-		templist = [college] + values
-		full_list.append(templist)
-	new_header = ['School Name'] + ['Region'] + ['School Type'] + salary_headers
-	tups = [new_header] + full_list
-	write_csv(college_fpath, tups, log=True)
-=======
 def write_colleges(college_fpath, salary_headers,
                 college_dict, type_to_colleges, region_to_colleges):
   tups = []
@@ -236,5 +145,4 @@ def write_colleges(college_fpath, salary_headers,
     tups.append([college, region, college_type] + college_dict[college])
 
   write_csv(college_fpath, tups, log=True)
->>>>>>> upstream/master
 
