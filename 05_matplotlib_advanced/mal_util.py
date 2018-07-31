@@ -11,7 +11,11 @@ def load_mal(mal_fpath):
   headers = []
   type_set = set()
 
+<<<<<<< HEAD
   with open(mal_fpath, 'r', encoding='cp932', errors='ignore') as f:
+=======
+  with open(mal_fpath , 'r', encoding='cp932', errors='ignore') as f:
+>>>>>>> upstream/master
     headers = f.readline().strip().split(',')
     studios, sources = set(), set()
     for line in csv.reader(f, quotechar='"', delimiter=',',
